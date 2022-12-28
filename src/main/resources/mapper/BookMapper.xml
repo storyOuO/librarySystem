@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.story.librarySystem.mapper.BookMapper">
+    <select id="selectAll" resultType="com.story.librarySystem.entity.Book">
+        select * from books;
+    </select>
+
+    <select id="selectBookIndex" resultType="com.story.librarySystem.entity.BookIndex">
+        select * from bookindex;
+    </select>
+
+    <select id="selectAuthorIndex" resultType="com.story.librarySystem.entity.AuthorIndex">
+        select * from authors;
+    </select>
+
+    <select id="selectPublishIndex" resultType="com.story.librarySystem.entity.PublishIndex">
+        select * from publish;
+    </select>
+
+    <select id="selectByBookNum" resultType="com.story.librarySystem.entity.Book">
+        select * from books where bookNum = #{bookNum};
+    </select>
+
+    <select id="selectByBookName" resultType="com.story.librarySystem.entity.Book">
+        select * from books where bookName = #{bookName};
+    </select>
+
+    <select id="selectByAuthor" resultType="com.story.librarySystem.entity.Book">
+        select * from books where author = #{author};
+    </select>
+
+    <select id="selectByPublish" resultType="com.story.librarySystem.entity.Book">
+        select * from books where publish = #{publish};
+    </select>
+
+    <select id="searchLengthByBookName" resultType="int">
+        select LENGTH(bookName) from books where bookName = #{bookName};
+    </select>
+
+    <select id="searchLengthByAuthor" resultType="int">
+        select LENGTH(author) from books where author = #{author};
+    </select>
+
+    <select id="searchLengthByPublish" resultType="int">
+        select LENGTH(publish) from books where publish = #{publish};
+    </select>
+
+    <insert id="addBook">
+        insert into books (bookNum,bookName,pointer1,author,pointer2,publish,pointer3,assort,storage)
+        values (#{bookNum},#{bookName},#{pointer1},#{author},#{pointer2},#{publish},#{pointer3},#{assort},#{storage});
+    </insert>
+
+    <insert id="addBookIndex">
+        insert into bookindex (bookName,headPointer,length)
+        values (#{bookName},#{headPointer},#{length});
+    </insert>
+
+    <insert id="addAuthors">
+        insert into authors (authorName,headPointer,length)
+        values (#{authorName},#{headPointer},#{length});
+    </insert>
+
+    <insert id="addPublish">
+        insert into publish (publishName,headPointer,length)
+        values (#{publishName},#{headPointer},#{length});
+    </insert>
+
+    <update id="updateBookIndex">
+        UPDATE bookindex SET headPointer = #{headPointer}, length = #{length} WHERE bookName = #{bookName};
+    </update>
+
+    <update id="updateAuthor">
+        UPDATE authors SET headPointer = #{headPointer}, length = #{length} WHERE authorName = #{authorName};
+    </update>
+
+    <update id="updatePublish">
+        UPDATE publish SET headPointer = #{headPointer}, length = #{length} WHERE publishName = #{publishName};
+    </update>
+
+    <update id="borrowBook">
+        UPDATE books SET borrow = borrow+1 where bookNum = #{bookNum};
+    </update>
+
+    <update id="returnBook">
+        UPDATE books SET borrow = borrow-1 where bookNum = #{bookNum};
+    </update>
+
+    <select id="getStorageByBookNum" resultType="int">
+        select storage from books where bookNum = #{bookNum};
+    </select>
+
+    <select id="getBorrowByBookNum" resultType="int">
+        select borrow from books where bookNum = #{bookNum};
+    </select>
+
+    <select id="getBookNameByBookNum" resultType="string">
+        select bookName from books where bookNum = #{bookNum};
+    </select>
+
+</mapper>

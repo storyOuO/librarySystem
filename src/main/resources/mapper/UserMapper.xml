@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.story.librarySystem.mapper.UserMapper">
+    <select id="getUser" resultType="com.story.librarySystem.entity.User">
+        select * from users where username = #{username};
+    </select>
+
+    <insert id="addUser">
+        insert into users (username,password) values (#{username},#{password});
+    </insert>
+
+    <update id="setBorrow">
+        update users SET borrow = #{bookNum},borrowDate = #{date} where username = #{username};
+    </update>
+
+    <select id="getAllUserName" resultType="string">
+        select username from users;
+    </select>
+
+    <select id="getBorrowByUserName" resultType="string">
+        select borrow from users where username = #{username};
+    </select>
+
+    <select id="selectAll" resultType="com.story.librarySystem.entity.User">
+        select * from users;
+    </select>
+
+    <update id="returnBook">
+        update users SET borrow = null,borrowDate = null where username = #{username};
+    </update>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from users where id = #{id};
+    </delete>
+
+    <select id="getBookNumByUserName" resultType="string">
+        select borrow from users where username=#{username};
+    </select>
+</mapper>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>图书查询</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">图书查询结果</div>
+    <!-- Table -->
+    <table class="table" th:if="${selectValue.size() > 0}" th:object="${selectValue}">
+        <tr>
+            <th>记录号</th>
+            <th>书号</th>
+            <th>书名</th>
+            <th>指针1</th>
+            <th>作者</th>
+            <th>指针2</th>
+            <th>出版社</th>
+            <th>指针3</th>
+            <th>分类</th>
+            <th>藏书量</th>
+            <th>借出数</th>
+        </tr>
+        <tr th:each="value:${selectValue}">
+            <td th:text="${value.num}"></td>
+            <td th:text="${value.bookNum}"></td>
+            <td th:text="${value.bookName}"></td>
+            <td th:text="${value.pointer1}"></td>
+            <td th:text="${value.author}"></td>
+            <td th:text="${value.pointer2}"></td>
+            <td th:text="${value.publish}"></td>
+            <td th:text="${value.pointer3}"></td>
+            <td th:text="${value.assort}"></td>
+            <td th:text="${value.storage}"></td>
+            <td th:text="${value.borrow}"></td>
+        </tr>
+    </table>
+    <h3 th:if="${selectValue.size() == 0}">查无数据,请重试!</h3>
+</div>
+<a th:href="@{'/index'}">
+    <button class="btn btn-success"
+            data-toggle="modal">返回主页面
+    </button>
+</a>
+</body>
+</html>
