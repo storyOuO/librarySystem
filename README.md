@@ -10,4 +10,6 @@
 
 ![image](https://user-images.githubusercontent.com/103101103/209815826-0220ae18-f887-4ca5-913f-0c593b9d8507.png)
 
+权限验证没有用spring security 采用的是简单的数据库验证
+
 有问题欢迎联系邮箱: 1216938059@qq.com 与我讨论!
